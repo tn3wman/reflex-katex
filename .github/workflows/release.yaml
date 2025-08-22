@@ -20,15 +20,15 @@ jobs:
       suffix: ${{ steps.release.outputs.suffix }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Extract tag and Details
         id: release
         run: |
           if [ "${{ github.ref_type }}" = "tag" ]; then
             TAG_NAME=${GITHUB_REF#refs/tags/}
-            NEW_VERSION=$(echo $TAG_NAME | awk -F'-' '{print $1}')
-            SUFFIX=$(echo $TAG_NAME | grep -oP '[a-z]+[0-9]+' || echo "")
+            NEW_VERSION=$(echo $TAG_NAME | sed 's/[a-z].*//')
+            SUFFIX=$(echo $TAG_NAME | grep -o '[a-z][0-9]*' || echo "")
             echo "new_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
             echo "suffix=$SUFFIX" >> "$GITHUB_OUTPUT"
             echo "tag_name=$TAG_NAME" >> "$GITHUB_OUTPUT"
@@ -70,17 +70,19 @@ jobs:
     needs: [details, check_pypi]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Install Poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python3 -
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+        uses: snok/install-poetry@v1
+        with:
+          version: latest
+          virtualenvs-create: true
+          virtualenvs-in-project: true
 
       - name: Set project version with Poetry
         run: |

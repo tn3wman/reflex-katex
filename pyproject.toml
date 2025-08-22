@@ -1,18 +1,38 @@
 [project]
 name = "reflex-katex"
-version = "0.0.2"
-description = "Reflex custom component katex"
+version = "0.0.3"
+description = "A Reflex custom component library for rendering beautiful mathematical expressions using KaTeX"
 readme = "README.md"
 license = { text = "Apache-2.0" }
 requires-python = ">=3.10,<3.14"
 authors = [
     { name = "Tyler" },
 ]
+keywords = ["reflex", "katex", "math", "latex", "mathematics", "component", "web"]
 dependencies = [
     "reflex >= 0.8.0"
 ]
 
-classifiers = ["Development Status :: 4 - Beta"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Text Processing :: Markup :: LaTeX",
+    "Framework :: Reflex",
+]
+
+[project.urls]
+Homepage = "https://github.com/tn3wman/reflex-katex"
+Documentation = "https://github.com/tn3wman/reflex-katex#readme"
+Repository = "https://github.com/tn3wman/reflex-katex"
+"Bug Tracker" = "https://github.com/tn3wman/reflex-katex/issues"
 
 [tool.poetry]
 packages = [
