@@ -1,6 +1,6 @@
 [project]
 name = "reflex-katex"
-version = "0.0.3"
+version = "0.0.4"
 description = "A Reflex custom component library for rendering beautiful mathematical expressions using KaTeX"
 readme = "README.md"
 license = { text = "Apache-2.0" }
@@ -25,7 +25,6 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Scientific/Engineering :: Mathematics",
     "Topic :: Text Processing :: Markup :: LaTeX",
-    "Framework :: Reflex",
 ]
 
 [project.urls]
