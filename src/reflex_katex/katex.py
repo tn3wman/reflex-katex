@@ -2,25 +2,6 @@
 
 import reflex as rx
 
-# Shared KaTeX styling - injected once
-_KATEX_STYLES = """
-// Show only MathML rendering, hide HTML version
-const katexStyles = `
-.katex-html {
-    display: none !important;
-}
-.katex-mathml {
-    display: inline !important;
-}
-`;
-
-if (typeof document !== 'undefined' && !document.getElementById('katex-styles')) {
-    const style = document.createElement('style');
-    style.id = 'katex-styles';
-    style.textContent = katexStyles;
-    document.head.appendChild(style);
-}
-"""
 
 class InlineMath(rx.Component):
     """KaTeX inline math component."""
@@ -28,12 +9,9 @@ class InlineMath(rx.Component):
     library = "react-katex"
     tag = "InlineMath"
     math: rx.Var[str]
-    
-    def _get_imports(self):
-        return {"react-katex": {"InlineMath", "BlockMath"}, "katex/dist/katex.min.css": set()}
-    
-    def _get_custom_code(self) -> str:
-        return _KATEX_STYLES
+
+    def add_imports(self):
+        return {"react-katex": ["InlineMath", "BlockMath"], "": "katex/dist/katex.min.css"}
     
 
 def inline_math(expression: str, **props) -> InlineMath:
@@ -55,12 +33,9 @@ class BlockMath(rx.Component):
     library = "react-katex"
     tag = "BlockMath"
     math: rx.Var[str]
-    
-    def _get_imports(self):
-        return {"react-katex": {"InlineMath", "BlockMath"}, "katex/dist/katex.min.css": set()}
-    
-    def _get_custom_code(self) -> str:
-        return _KATEX_STYLES
+
+    def add_imports(self):
+        return {"react-katex": ["InlineMath", "BlockMath"], "": "katex/dist/katex.min.css"}
 
 
 def block_math(expression: str, **props) -> BlockMath:
